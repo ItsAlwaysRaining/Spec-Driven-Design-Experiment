@@ -1,6 +1,6 @@
 # Requirements: Temperature Converter
 
-Status: Draft. US-1 to US-3 are implemented; US-4 is awaiting review.
+Status: Approved. US-1 to US-3 are implemented; US-4 is not yet implemented.
 
 ## Goal
 
