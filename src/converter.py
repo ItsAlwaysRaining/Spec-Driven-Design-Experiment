@@ -28,6 +28,14 @@ def convert(value: float, from_unit: str, to_unit: str) -> float:
     return kelvin / to_factor - to_offset  # AC-1 to AC-4, AC-8 to AC-11
 
 
+def format_result(value: float, unit: str) -> str:
+    """Format for display: 2 decimals and the unit, e.g. "212.00 F" (AC-7, AC-15)."""
+    text = f"{value:.2f}"
+    if text == "-0.00":  # never show negative zero
+        text = "0.00"
+    return f"{text} {unit.upper()}"
+
+
 def main(argv) -> int:
     if len(argv) != 3:  # AC-12
         print("Usage: converter.py <value> <from_unit> <to_unit>  (units: "
@@ -38,10 +46,7 @@ def main(argv) -> int:
     except ValueError as e:
         print(f"Error: {e}")
         return 1
-    text = f"{result:.2f}"
-    if text == "-0.00":  # AC-7: never show negative zero
-        text = "0.00"
-    print(f"{text} {argv[2].upper()}")  # AC-7
+    print(format_result(result, argv[2]))  # AC-7
     return 0
 
 

@@ -132,6 +132,10 @@ class TestServer(unittest.TestCase):
         _, _, body = self.fetch("/?value=0&unit=C")
         self.assertIn("32.00 F", body)
 
+    def test_ac16_submitting_an_empty_field_shows_an_error(self):
+        _, _, body = self.fetch("/?value=&unit=C")
+        self.assertIn("Error: Enter a number", body)
+
     def test_other_paths_return_404(self):
         with self.assertRaises(urllib.error.HTTPError) as caught:
             self.fetch("/favicon.ico")

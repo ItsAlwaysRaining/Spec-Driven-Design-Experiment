@@ -48,19 +48,19 @@ Tests first:
 
 Then code:
 
-- [ ] **T17** Move the 2-decimal formatting from the CLI's `main()` into `format_result()` in
+- [x] **T17** Move the 2-decimal formatting from the CLI's `main()` into `format_result()` in
   `converter.py`, and use it in the CLI. CLI output must not change (AC-7, AC-15)
-- [ ] **T18** Create `src/gui.py` with `conversion_lines()`: parse the text, reject empty, non-numbers,
+- [x] **T18** Create `src/gui.py` with `conversion_lines()`: parse the text, reject empty, non-numbers,
   `nan` and `inf`, and convert to every other unit in table order (AC-14 to AC-17)
-- [ ] **T19** Add `render_page()`: plain HTML form with the unit list from `UNITS`, keeping the entered
+- [x] **T19** Add `render_page()`: plain HTML form with the unit list from `UNITS`, keeping the entered
   value and unit, then the results or `Error: <message>`, with the value escaped (AC-13, AC-16, AC-17)
-- [ ] **T20** Add `make_server()` and `main()`: listen on `127.0.0.1`, free port, open the browser,
+- [x] **T20** Add `make_server()` and `main()`: listen on `127.0.0.1`, free port, open the browser,
   print the address, stop on Ctrl+C (AC-18)
-- [ ] **T21** Update `README.md`: how to start the page, and add `gui.py` and `test_gui.py` to the layout
+- [x] **T21** Update `README.md`: how to start the page, and add `gui.py` and `test_gui.py` to the layout
 
 Finish:
 
-- [ ] **T22** Run all the tests and confirm they pass
+- [x] **T22** Run all the tests and confirm they pass
 - [ ] **T23** Manual check: run `python3 src/gui.py` and try a conversion, an error and the Enter key
   in the browser
 - [ ] **T24** Open a PR with `Closes #6` for review
