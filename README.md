@@ -2,7 +2,7 @@
 
 A tiny project showing the spec-driven workflow: **write the spec first, then the code.**
 
-Example feature: a temperature converter (Celsius ⇄ Fahrenheit).
+Example feature: a temperature converter (Celsius, Fahrenheit and Kelvin).
 
 ## Workflow
 
@@ -43,9 +43,15 @@ python3 -m unittest discover -s tests -v
 ## Try it
 
 ```bash
-python3 src/converter.py 100 C    # -> 212.00 F
-python3 src/converter.py 32 F     # -> 0.00 C
+python3 src/converter.py <value> <from_unit> <to_unit>
+
+python3 src/converter.py 100 C F    # -> 212.00 F
+python3 src/converter.py 32 F C     # -> 0.00 C
+python3 src/converter.py 0 C K      # -> 273.15 K
+python3 src/converter.py 0 K F      # -> -459.67 F
 ```
+
+Units are `C`, `F` and `K` (case-insensitive).
 
 ## Adding a new feature
 
