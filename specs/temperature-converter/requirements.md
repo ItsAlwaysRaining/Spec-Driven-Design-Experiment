@@ -1,6 +1,6 @@
 # Requirements: Temperature Converter
 
-Status: Approved
+Status: Implemented (all acceptance criteria verified by `tests/test_converter.py`)
 
 ## Goal
 
