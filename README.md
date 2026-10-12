@@ -49,7 +49,11 @@ python3 src/converter.py 32 F     # -> 0.00 C
 
 ## Adding a new feature
 
-1. Create `specs/<feature-name>/` and write `requirements.md` there.
-2. Get the requirements reviewed, then write `design.md`.
-3. Break the design into `tasks.md`.
-4. Write the tests, then the code, and tick off the tasks as you finish them.
+1. Open a GitHub issue for each user story (label `user-story`).
+2. Create a branch: `git switch -c feature/<name>`.
+3. Create `specs/<feature-name>/` and write `requirements.md` there.
+4. Get the requirements reviewed, then write `design.md`.
+5. Break the design into `tasks.md`.
+6. Write the tests, then the code, and tick off the tasks as you finish them.
+7. Push and open a pull request (`gh pr create`) with `Closes #<n>` in the description.
+8. The repo owner reviews and merges. `main` is protected, so direct pushes are rejected.
