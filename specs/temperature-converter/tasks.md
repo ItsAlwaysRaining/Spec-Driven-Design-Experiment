@@ -61,6 +61,6 @@ Then code:
 Finish:
 
 - [x] **T22** Run all the tests and confirm they pass
-- [ ] **T23** Manual check: run `python3 src/gui.py` and try a conversion, an error and the Enter key
+- [x] **T23** Manual check: run `python3 src/gui.py` and try a conversion, an error and the Enter key
   in the browser
-- [ ] **T24** Open a PR with `Closes #6` for review
+- [x] **T24** Open a PR with `Closes #6` for review

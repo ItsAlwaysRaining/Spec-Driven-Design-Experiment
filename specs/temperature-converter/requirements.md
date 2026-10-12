@@ -1,6 +1,6 @@
 # Requirements: Temperature Converter
 
-Status: Approved. US-1 to US-4 are implemented; US-5 is not yet implemented.
+Status: Implemented (all acceptance criteria verified by `tests/test_converter.py` and `tests/test_gui.py`)
 
 ## Goal
 
