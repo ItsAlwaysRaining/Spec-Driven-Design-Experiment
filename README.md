@@ -1,0 +1,55 @@
+# Spec Driven Design — Minimal Example
+
+A tiny project showing the spec-driven workflow: **write the spec first, then the code.**
+
+Example feature: a temperature converter (Celsius ⇄ Fahrenheit).
+
+## Workflow
+
+```
+1. requirements.md  →  WHAT we build and how we know it works (acceptance criteria)
+2. design.md        →  HOW we build it (interfaces, data, error handling)
+3. tasks.md         →  the ordered checklist of implementation steps
+4. tests/           →  tests derived directly from the acceptance criteria
+5. src/             →  code written to make the tests pass
+```
+
+Every acceptance criterion has an ID (e.g. `AC-1`), and the tests use those IDs,
+so you can trace each line of code back to a requirement.
+
+## Layout
+
+```
+.
+├── CLAUDE.md                          # rules for AI assistants working here
+├── README.md
+├── specs/
+│   └── temperature-converter/
+│       ├── requirements.md
+│       ├── design.md
+│       └── tasks.md
+├── src/
+│   └── converter.py
+└── tests/
+    └── test_converter.py
+```
+
+## Run the tests
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+## Try it
+
+```bash
+python3 src/converter.py 100 C    # -> 212.00 F
+python3 src/converter.py 32 F     # -> 0.00 C
+```
+
+## Adding a new feature
+
+1. Create `specs/<feature-name>/` and write `requirements.md` there.
+2. Get the requirements reviewed, then write `design.md`.
+3. Break the design into `tasks.md`.
+4. Write the tests, then the code, and tick off the tasks as you finish them.
