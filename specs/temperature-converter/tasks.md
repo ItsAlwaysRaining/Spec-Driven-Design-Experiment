@@ -40,9 +40,9 @@ Finish:
 
 Tests first:
 
-- [ ] **T15** Add a test for `format_result()` to `tests/test_converter.py`: `212.00 F`, and `0.00`
+- [x] **T15** Add a test for `format_result()` to `tests/test_converter.py`: `212.00 F`, and `0.00`
   instead of `-0.00` (AC-7, AC-15)
-- [ ] **T16** Create `tests/test_gui.py` with tests for `conversion_lines` (AC-14 to AC-16), a unit
+- [x] **T16** Create `tests/test_gui.py` with tests for `conversion_lines` (AC-14 to AC-16), a unit
   added to `UNITS` appearing automatically (AC-17), `render_page` (AC-13, AC-16, escaping `<script>`)
   and a real server on a free port (AC-18). Run them and confirm they fail.
 

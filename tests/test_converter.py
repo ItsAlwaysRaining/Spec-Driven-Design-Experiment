@@ -8,9 +8,21 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPT = os.path.join(ROOT, "src", "converter.py")
 sys.path.insert(0, os.path.join(ROOT, "src"))
 
+import converter  # noqa: E402
 from converter import convert  # noqa: E402
 
 PLACES = 9  # design.md: compare with a small tolerance, not exact equality
+
+
+class TestFormatResult(unittest.TestCase):
+    def test_ac7_ac15_two_decimals_and_unit(self):
+        self.assertEqual(converter.format_result(211.99999999999994, "F"), "212.00 F")
+
+    def test_ac7_ac15_never_negative_zero(self):
+        self.assertEqual(converter.format_result(-0.004, "F"), "0.00 F")
+
+    def test_unit_is_shown_in_upper_case(self):
+        self.assertEqual(converter.format_result(273.15, "k"), "273.15 K")
 
 
 class TestConvert(unittest.TestCase):

@@ -125,6 +125,7 @@ Value [ 100        ]  Unit [ C ▾ ]  [ Convert ]
 - After converting, the form keeps the entered value and selected unit, so the user can change
   one thing and convert again (AC-16).
 - On first load (no `value` in the address) the page shows the empty form and no results.
+- Any path other than `/` returns `404 Not Found` (browsers ask for `/favicon.ico` on their own).
 
 ### Code structure
 
