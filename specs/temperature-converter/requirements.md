@@ -8,9 +8,11 @@ Let a user convert a temperature between Celsius and Fahrenheit from the command
 
 ## User stories
 
-- **US-1:** As a user, I want to convert Celsius to Fahrenheit so I can read US weather reports.
-- **US-2:** As a user, I want to convert Fahrenheit to Celsius so I can follow US recipes.
-- **US-3:** As a user, I want a clear error when I enter something invalid, so I know what to fix.
+Each story is tracked as a GitHub issue with the `user-story` label.
+
+- **US-1** ([#1](https://github.com/ItsAlwaysRaining/Spec-Driven-Design-Experiment/issues/1)): As a user, I want to convert Celsius to Fahrenheit so I can read US weather reports.
+- **US-2** ([#2](https://github.com/ItsAlwaysRaining/Spec-Driven-Design-Experiment/issues/2)): As a user, I want to convert Fahrenheit to Celsius so I can follow US recipes.
+- **US-3** ([#3](https://github.com/ItsAlwaysRaining/Spec-Driven-Design-Experiment/issues/3)): As a user, I want a clear error when I enter something invalid, so I know what to fix.
 
 ## Acceptance criteria
 
