@@ -15,9 +15,9 @@ Implements: [design.md](design.md)
 
 Tests first:
 
-- [ ] **T7** Update the existing tests to `convert(value, from_unit, to_unit)` and the three-argument
+- [x] **T7** Update the existing tests to `convert(value, from_unit, to_unit)` and the three-argument
   command line, comparing with `assertAlmostEqual(..., places=9)` (AC-1 to AC-7)
-- [ ] **T8** Add tests for AC-8 to AC-12, `0 K` allowed and `-0.01 K` rejected (AC-5), an unknown
+- [x] **T8** Add tests for AC-8 to AC-12, `0 K` allowed and `-0.01 K` rejected (AC-5), an unknown
   target unit (AC-6), the two-argument form printing usage (AC-12), and no `-0.00` in the output.
   Run them and confirm they fail.
 
