@@ -1,6 +1,6 @@
 # Design: Temperature Converter
 
-Status: Approved (US-4 not yet implemented) · Implements: [requirements.md](requirements.md)
+Status: Implemented · Implements: [requirements.md](requirements.md)
 
 ## Overview
 

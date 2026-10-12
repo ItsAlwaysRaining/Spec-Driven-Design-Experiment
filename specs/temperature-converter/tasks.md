@@ -23,15 +23,15 @@ Tests first:
 
 Then code:
 
-- [ ] **T9** Replace the C/F formulas with the unit table (offset, factor) and convert through
+- [x] **T9** Replace the C/F formulas with the unit table (offset, factor) and convert through
   Kelvin (AC-1 to AC-4, AC-8 to AC-11)
-- [ ] **T10** Build validation from the table: unknown source or target unit (AC-6), and absolute
+- [x] **T10** Build validation from the table: unknown source or target unit (AC-6), and absolute
   zero checked in Kelvin (AC-5)
-- [ ] **T11** Update the command line: three arguments, usage message on the wrong number of arguments,
+- [x] **T11** Update the command line: three arguments, usage message on the wrong number of arguments,
   2-decimal output that never shows `-0.00` (AC-7, AC-12)
-- [ ] **T12** Update the `README.md` examples to the new command format
+- [x] **T12** Update the `README.md` examples to the new command format
 
 Finish:
 
-- [ ] **T13** Run all the tests and confirm they pass
-- [ ] **T14** Open a PR with `Closes #5` for review
+- [x] **T13** Run all the tests and confirm they pass
+- [x] **T14** Open a PR with `Closes #5` for review
