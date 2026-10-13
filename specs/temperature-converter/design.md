@@ -4,8 +4,11 @@ Status: Implemented · Implements: [requirements.md](requirements.md)
 
 ## Overview
 
-One Python module, `src/converter.py`, with pure functions plus a thin command-line wrapper.
-It uses only the standard library.
+Two Python modules, both using only the standard library:
+
+- `src/converter.py`: pure conversion functions plus a thin command-line wrapper (US-1 to US-4).
+- `src/gui.py`: a small local web page for US-5, built on top of `converter.py`.
+  See [Browser page (US-5)](#browser-page-us-5).
 
 Every conversion goes through **Kelvin** as a common base: source unit → Kelvin → target unit.
 Each unit is one row in a table, so adding a unit (e.g. Rankine) means adding one row,
@@ -83,3 +86,92 @@ Checking absolute zero in Kelvin means one rule covers every unit, including fut
   Their expected values stay the same.
 - New tests cover AC-8 to AC-12, plus `0 K` (allowed) and `-0.01 K` (error) for AC-5.
 - `README.md` examples are updated to the new command format.
+
+## Browser page (US-5)
+
+### How it runs
+
+```
+python3 src/gui.py
+```
+
+1. Starts Python's built-in web server (`http.server`) on `127.0.0.1` only, so no other device
+   can reach it.
+2. Lets the operating system pick a free port, so it never clashes with something already running.
+3. Opens the page in the default browser (`webbrowser`), and prints the address in the terminal
+   in case the browser doesn't open.
+4. Keeps running until the user presses **Ctrl+C** in the terminal.
+
+All of these are in the standard library, so nothing needs installing (AC-18).
+
+### The page
+
+Plain HTML, with no CSS, JavaScript or images, so it has the browser's default look
+(minimal-formatting constraint):
+
+```
+Temperature Converter
+
+Value [ 100        ]  Unit [ C ▾ ]  [ Convert ]
+
+212.00 F
+373.15 K
+```
+
+- A normal HTML **form** submitted with GET: `/?value=100&unit=C`. Pressing **Enter** in the
+  field submits it too, with no JavaScript needed.
+- The unit list is built from `UNITS` in `converter.py`, so a new unit appears automatically
+  (AC-13, AC-17).
+- After converting, the form keeps the entered value and selected unit, so the user can change
+  one thing and convert again (AC-16).
+- On first load (no `value` in the address) the page shows the empty form and no results.
+- Any path other than `/` returns `404 Not Found` (browsers ask for `/favicon.ico` on their own).
+
+### Code structure
+
+The logic is kept out of the web server, so it can be tested without a browser:
+
+| Function | Where | Does | Covers |
+|----------|-------|------|--------|
+| `format_result(value, unit) -> str` | `converter.py` | `"212.00 F"`: 2 decimals, never `-0.00`. Moved out of the CLI's `main()` so the CLI and the page share it. CLI output does not change. | AC-7, AC-15 |
+| `conversion_lines(value_text, from_unit) -> List[str]` | `gui.py` | Parses the text, converts to every unit in `UNITS` except the source, in table order, and formats each one. Raises `ValueError` with a message for the user. | AC-14 – AC-17 |
+| `render_page(value_text, unit) -> str` | `gui.py` | Builds the full HTML: the form, then either the result lines or the error. | AC-13, AC-16 |
+| `make_server(port=0) -> HTTPServer` | `gui.py` | Creates the server on `127.0.0.1` without starting it or opening a browser. Used by `main()` and by the tests. | AC-18 |
+| `main()` | `gui.py` | `make_server()`, opens the browser, serves until Ctrl+C. | AC-18 |
+
+### Errors (AC-16)
+
+The page shows `Error: <message>` where the results would be. The server keeps running.
+
+| Input | Message |
+|-------|---------|
+| Empty, not a number, `nan` or `inf` | `Enter a number` |
+| Below absolute zero | `Below absolute zero` (from `convert()`) |
+| Unknown unit (only possible by editing the address) | `Unit must be one of C, F, K` (from `convert()`) |
+
+### Security
+
+The entered value is shown back on the page, so it is escaped with `html.escape` before being
+written into the HTML. Otherwise typing something like `<script>` into the field would run as
+code in the page. The server only listens on `127.0.0.1`.
+
+### Known gap, not fixed here
+
+Python's `float()` accepts `nan` and `inf`, so the command line prints `nan F` today. The page
+rejects these. Fixing the CLI is a change to US-3 and belongs in its own issue.
+
+### Testing
+
+New file `tests/test_gui.py`, using `unittest` as before. Each test names its AC.
+
+- `conversion_lines`: AC-14 (`100 C` → `212.00 F`, `373.15 K`, source unit not included),
+  AC-15 (`-17.78 C` gives `0.00 F`), AC-16 (empty, `abc`, `nan`, below absolute zero).
+- AC-17: temporarily add a unit to `UNITS` in the test (`unittest.mock.patch.dict`, e.g. Rankine
+  `offset 0, factor 5/9`) and check it appears in both the unit list and the results.
+- `render_page`: the form has the value field and every unit (AC-13); an error replaces the
+  results (AC-16); `<script>` in the value comes back escaped.
+- AC-18: start `make_server()` on a free port in a background thread, fetch
+  `/?value=100&unit=C` with `urllib`, check the results are in the page, then shut it down.
+  The tests never open a browser.
+- Existing CLI tests stay unchanged and protect the `format_result` move.
+- Manual check before the PR: run `python3 src/gui.py` and try it in the browser.

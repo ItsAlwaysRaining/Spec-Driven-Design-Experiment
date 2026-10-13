@@ -35,3 +35,32 @@ Finish:
 
 - [x] **T13** Run all the tests and confirm they pass
 - [x] **T14** Open a PR with `Closes #5` for review
+
+## US-5: Browser page ([#6](https://github.com/ItsAlwaysRaining/Spec-Driven-Design-Experiment/issues/6))
+
+Tests first:
+
+- [x] **T15** Add a test for `format_result()` to `tests/test_converter.py`: `212.00 F`, and `0.00`
+  instead of `-0.00` (AC-7, AC-15)
+- [x] **T16** Create `tests/test_gui.py` with tests for `conversion_lines` (AC-14 to AC-16), a unit
+  added to `UNITS` appearing automatically (AC-17), `render_page` (AC-13, AC-16, escaping `<script>`)
+  and a real server on a free port (AC-18). Run them and confirm they fail.
+
+Then code:
+
+- [x] **T17** Move the 2-decimal formatting from the CLI's `main()` into `format_result()` in
+  `converter.py`, and use it in the CLI. CLI output must not change (AC-7, AC-15)
+- [x] **T18** Create `src/gui.py` with `conversion_lines()`: parse the text, reject empty, non-numbers,
+  `nan` and `inf`, and convert to every other unit in table order (AC-14 to AC-17)
+- [x] **T19** Add `render_page()`: plain HTML form with the unit list from `UNITS`, keeping the entered
+  value and unit, then the results or `Error: <message>`, with the value escaped (AC-13, AC-16, AC-17)
+- [x] **T20** Add `make_server()` and `main()`: listen on `127.0.0.1`, free port, open the browser,
+  print the address, stop on Ctrl+C (AC-18)
+- [x] **T21** Update `README.md`: how to start the page, and add `gui.py` and `test_gui.py` to the layout
+
+Finish:
+
+- [x] **T22** Run all the tests and confirm they pass
+- [x] **T23** Manual check: run `python3 src/gui.py` and try a conversion, an error and the Enter key
+  in the browser
+- [x] **T24** Open a PR with `Closes #6` for review

@@ -2,7 +2,8 @@
 
 A tiny project showing the spec-driven workflow: **write the spec first, then the code.**
 
-Example feature: a temperature converter (Celsius, Fahrenheit and Kelvin).
+Example feature: a temperature converter (Celsius, Fahrenheit and Kelvin), with a command line
+and a simple browser page.
 
 ## Workflow
 
@@ -29,9 +30,11 @@ so you can trace each line of code back to a requirement.
 │       ├── design.md
 │       └── tasks.md
 ├── src/
-│   └── converter.py
+│   ├── converter.py                   # conversions + command line
+│   └── gui.py                         # browser page
 └── tests/
-    └── test_converter.py
+    ├── test_converter.py
+    └── test_gui.py
 ```
 
 ## Run the tests
@@ -52,6 +55,17 @@ python3 src/converter.py 0 K F      # -> -459.67 F
 ```
 
 Units are `C`, `F` and `K` (case-insensitive).
+
+## Try the browser page
+
+```bash
+python3 src/gui.py
+```
+
+This opens the converter in your web browser. Enter a value, choose its unit, and press
+**Convert** (or Enter) to see it in every other unit. The page runs only on your own computer.
+Press **Ctrl+C** in the terminal to stop it. If the browser doesn't open, copy the address
+printed in the terminal.
 
 ## Adding a new feature
 
